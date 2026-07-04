@@ -191,6 +191,23 @@ function M.get(p, opts)
 		groups.BlinkCmpKind = { fg = p.purple }
 	end
 
+	if opts.integrations.snacks then
+		groups.SnacksNormal = { fg = p.text, bg = float_bg }
+		groups.SnacksNormalNC = { fg = p.text, bg = float_bg }
+		groups.SnacksBorder = { fg = p.border, bg = float_bg }
+		groups.SnacksBackdrop = { bg = p.crust }
+		groups.SnacksPicker = { fg = p.text, bg = float_bg }
+		groups.SnacksPickerBorder = { fg = p.border, bg = float_bg }
+		groups.SnacksPickerTitle = { fg = p.base, bg = p.green }
+		groups.SnacksPickerBoxTitle = { fg = p.base, bg = p.green }
+		groups.SnacksPickerInputTitle = { fg = p.base, bg = p.green }
+		groups.SnacksPickerPreviewTitle = { fg = p.base, bg = p.green }
+		groups.SnacksPickerMatch = { fg = p.green, bold = true }
+		groups.SnacksPickerDir = { fg = p.overlay1 }
+		groups.SnacksPickerFile = { fg = p.text }
+		groups.SnacksPickerListCursorLine = { bg = p.surface1 }
+	end
+
 	if opts.integrations.noice then
 		groups.NoiceCmdlinePopup = { fg = p.text, bg = float_bg }
 		groups.NoiceCmdlinePopupBorder = { fg = p.border, bg = float_bg }
