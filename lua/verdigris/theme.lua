@@ -79,8 +79,8 @@ function M.get(p, opts)
 		IncSearch = { fg = p.base, bg = p.yellow },
 		CurSearch = { fg = p.base, bg = p.yellow },
 
-		Visual = { bg = p.surface1 },
-		VisualNOS = { bg = p.surface1 },
+		Visual = { bg = p.select },
+		VisualNOS = { bg = p.select },
 		MatchParen = { fg = p.green, bold = true, underline = true },
 
 		NonText = { fg = p.overlay0 },
