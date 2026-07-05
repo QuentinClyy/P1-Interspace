@@ -13,6 +13,7 @@ M.defaults = {
 		treesitter = true,
 		snacks = true,
 		fzf_lua = true,
+    nvim_tree = true,
 	},
 }
 

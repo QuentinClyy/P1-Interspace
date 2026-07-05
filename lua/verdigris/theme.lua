@@ -208,6 +208,25 @@ function M.get(p, opts)
 		groups.SnacksPickerListCursorLine = { bg = p.surface1 }
 	end
 
+  if opts.integrations.nvim_tree then
+    groups.NvimTreeNormal = { fg = p.text, bg = p.mantle }
+    groups.NvimTreeNormalNC = { fg = p.text, bg = p.mantle }
+    groups.NvimTreeWinSeparator = { fg = p.border, bg = p.mantle }
+    groups.NvimTreeRootFolder = { fg = p.green, bold = true }
+    groups.NvimTreeFolderIcon = { fg = p.blue }
+    groups.NvimTreeFolderName = { fg = p.text }
+    groups.NvimTreeOpenedFolderName = { fg = p.green, bold = true }
+    groups.NvimTreeEmptyFolderName = { fg = p.overlay1 }
+    groups.NvimTreeIndentMarker = { fg = p.overlay0 }
+    groups.NvimTreeGitDirty = { fg = p.yellow }
+    groups.NvimTreeGitNew = { fg = p.green }
+    groups.NvimTreeGitDeleted = { fg = p.red }
+    groups.NvimTreeSpecialFile = { fg = p.sand, underline = true }
+    groups.NvimTreeExecFile = { fg = p.green }
+    groups.NvimTreeCursorLine = { bg = p.surface1 }
+    groups.NvimTreeStatuslineNc = { fg = p.mantle, bg = p.mantle }
+  end
+
 	if opts.integrations.fzf_lua then
 		groups.FzfLuaNormal = { fg = p.text, bg = float_bg }
 		groups.FzfLuaBorder = { fg = p.border, bg = float_bg }
