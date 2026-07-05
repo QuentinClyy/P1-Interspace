@@ -12,6 +12,7 @@ M.defaults = {
 		noice = true,
 		treesitter = true,
 		snacks = true,
+		fzf_lua = true,
 	},
 }
 

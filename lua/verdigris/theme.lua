@@ -208,6 +208,27 @@ function M.get(p, opts)
 		groups.SnacksPickerListCursorLine = { bg = p.surface1 }
 	end
 
+	if opts.integrations.fzf_lua then
+		groups.FzfLuaNormal = { fg = p.text, bg = float_bg }
+		groups.FzfLuaBorder = { fg = p.border, bg = float_bg }
+		groups.FzfLuaPreviewNormal = { fg = p.text, bg = float_bg }
+		groups.FzfLuaPreviewBorder = { fg = p.border, bg = float_bg }
+		groups.FzfLuaCursorLine = { bg = p.surface1 }
+		groups.FzfLuaCursorLineNr = { fg = p.green, bold = true }
+		groups.FzfLuaScrollBorderBackCompat = { fg = p.border, bg = float_bg }
+		groups.FzfLuaScrollFloatBackCompat = { bg = p.surface1 }
+		groups.FzfLuaTitle = { fg = p.base, bg = p.green }
+		groups.FzfLuaHeaderText = { fg = p.blue }
+		groups.FzfLuaHeaderBind = { fg = p.overlay1 }
+	end
+
+	if opts.integrations.noice then
+		groups.NoiceCmdlinePopup = { fg = p.text, bg = float_bg }
+		groups.NoiceCmdlinePopupBorder = { fg = p.border, bg = float_bg }
+		groups.NoiceCmdlinePopupBorderCmdline = { fg = p.border, bg = float_bg }
+		groups.NoiceCmdlinePopupTitleCmdline = { fg = p.base, bg = p.green }
+	end
+
 	if opts.integrations.noice then
 		groups.NoiceCmdlinePopup = { fg = p.text, bg = float_bg }
 		groups.NoiceCmdlinePopupBorder = { fg = p.border, bg = float_bg }
