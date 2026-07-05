@@ -8,7 +8,7 @@ return {
 	overlay0 = "#3c5b56",
 	overlay1 = "#46615c",
 	overlay2 = "#5c7d76",
-	select = "e3cb9c",
+	select = "#9cdce3",
 	subtext0 = "#7d9490",
 	subtext1 = "#9fc9bd",
 	text = "#9fc9bd",
