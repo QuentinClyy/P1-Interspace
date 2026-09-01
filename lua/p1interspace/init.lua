@@ -1,7 +1,7 @@
-local config = require("verdigris.config")
-local palette = require("verdigris.palette")
-local theme = require("verdigris.theme")
-local util = require("verdigris.util")
+local config = require("p1interspace.config")
+local palette = require("p1interspace.palette")
+local theme = require("p1interspace.theme")
+local util = require("p1interspace.util")
 
 local M = {}
 
@@ -13,7 +13,7 @@ function M.load()
 	end
 
 	vim.o.termguicolors = true
-	vim.g.colors_name = "verdigris"
+	vim.g.colors_name = "p1interspace"
 
 	local opts = config.options
 	local highlights = theme.get(palette, opts)
@@ -32,7 +32,7 @@ function M.load()
 
 	vim.api.nvim_create_autocmd("ColorScheme", {
 		callback = function()
-			if vim.g.colors_name == "verdigris" then
+			if vim.g.colors_name == "p1interspace" then
 				local reapplied = theme.get(palette, config.options)
 				util.set_highlights(reapplied)
 			end

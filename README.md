@@ -1,6 +1,6 @@
-# verdigris.nvim
+# P1 Interspace
 
-A deep blue-green colorscheme for Neovim, with a matching tmux status line.
+A deep blue-green colorscheme for Neovim, with a matching tmux status line and WezTerm theme. Named after the P1 phosphor — the medium-persistence green coating used in classic CRT terminals and oscilloscopes — and the sense of being inside an interface.
 
 ## Installation
 
@@ -8,13 +8,13 @@ Using lazy.nvim:
 
 ```lua
 return {
-  "QuentinClyy/verdigris.nvim",
+  "QuentinClyy/P1-Interspace",
   lazy = false,
   priority = 1000,
   opts = {},
   config = function(_, opts)
-    require("verdigris").setup(opts)
-    vim.cmd.colorscheme("verdigris")
+    require("p1interspace").setup(opts)
+    vim.cmd.colorscheme("p1interspace")
   end,
 }
 ```
@@ -24,7 +24,7 @@ return {
 Defaults shown below, pass any subset to `setup()`:
 
 ```lua
-require("verdigris").setup({
+require("p1interspace").setup({
   transparent = false,
   popup_blend = 15,
   integrations = {
@@ -35,6 +35,9 @@ require("verdigris").setup({
     blink = true,
     noice = true,
     treesitter = true,
+    snacks = true,
+    fzf_lua = true,
+    nvim_tree = true,
   },
 })
 ```
@@ -45,13 +48,73 @@ require("verdigris").setup({
 
 ## tmux
 
-Copy `extras/tmux/verdigris.conf` into your tmux config directory and source it from `~/.tmux.conf`:
+Copy `extras/tmux/p1interspace.conf` into your tmux config directory and source it from `~/.tmux.conf`:
 
 ```
-source-file ~/.config/tmux/verdigris.conf
+source-file ~/.config/tmux/p1interspace.conf
 ```
 
-To let your terminal's own transparency/blur show through the tmux status bar and panes instead of the solid background color, replace every `bg=#0c1917` in `verdigris.conf` with `bg=default`.
+To let your terminal's own transparency/blur show through the tmux status bar and panes instead of the solid background color, replace every `bg=#0c1917` in `p1interspace.conf` with `bg=default`.
+
+## WezTerm
+
+**Recommended: via WezTerm's plugin system.** WezTerm clones this repo into its own runtime directory automatically the first time it's referenced — no manual copy, no path to maintain:
+
+```lua
+local p1interspace = wezterm.plugin.require("https://github.com/QuentinClyy/P1-Interspace")
+p1interspace.apply_to_config(config)
+```
+
+Update alongside other plugins with `wezterm.plugin.update_all()`. Requires HTTPS access to this repo (WezTerm's plugin loader doesn't support SSH remotes) — this repo is public, so no credentials needed.
+
+**Alternative: manual copy.** If you'd rather not rely on the plugin mechanism, copy `extras/wezterm/p1interspace.toml` into WezTerm's color scheme directory instead:
+
+```
+mkdir -p ~/.config/wezterm/colors
+cp extras/wezterm/p1interspace.toml ~/.config/wezterm/colors/
+```
+
+Then reference it by name in `wezterm.lua`:
+
+```lua
+config.color_scheme = "P1 Interspace"
+```
+
+Either way, the WezTerm palette is generated from the exact same hex values as the Neovim and tmux themes, so all three match.
+
+## Structure
+
+```
+lua/p1interspace/
+  init.lua                    -- load() entry point, ColorScheme/LazyLoad reapply hooks
+  config.lua                  -- setup(), integrations table
+  palette.lua                 -- the color values, nothing else
+  util.lua                    -- blend/darken/lighten, set_highlights()
+  theme.lua                   -- merges editor/syntax/treesitter + enabled integrations
+  groups/
+    editor.lua                -- windows, cursor, statusline, popup, search, diagnostics, diff, spell
+    syntax.lua                -- legacy (non-treesitter) vim syntax groups
+    treesitter.lua            -- @capture groups, gated behind integrations.treesitter
+    integrations/
+      telescope.lua
+      which_key.lua
+      gitsigns.lua
+      cmp.lua
+      blink.lua
+      snacks.lua
+      nvim_tree.lua
+      fzf_lua.lua
+      noice.lua
+colors/p1interspace.lua       -- standard :colorscheme entry point
+plugin/init.lua               -- WezTerm plugin entry point (apply_to_config)
+extras/
+  tmux/p1interspace.conf
+  wezterm/p1interspace.toml
+```
+
+Each integration file is `function(ctx) -> table of highlight groups`, only required and merged into the final highlight table when its `config.integrations.<name>` flag is `true` — same pattern catppuccin uses for its own `groups/integrations/*.lua`, rather than one large file with an if-block per plugin.
+
+Fixed while restructuring: `integrations.treesitter` existed as a config option before but was never actually checked — treesitter `@capture` groups were applied unconditionally regardless of the setting. `theme.lua` now gates them correctly.
 
 ## License
 

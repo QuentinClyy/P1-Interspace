@@ -1,0 +1,48 @@
+[metadata]
+name = "P1 Interspace"
+author = "Quentin Callay"
+origin_url = "https://github.com/QuentinClyy/P1-Interspace"
+
+[colors]
+foreground = "#9fc9bd"   # text
+background = "#0a171a"   # base
+
+cursor_bg = "#9fc9bd"
+cursor_fg = "#0a171a"
+cursor_border = "#9fc9bd"
+
+selection_fg = "#9fc9bd"
+selection_bg = "#466366"  # select
+
+split = "#24413c"        # border
+
+# ANSI 0-7 and bright 8-15, mapped from the same palette used in nvim and
+# tmux so all three feel like the same theme. Brights that don't have a
+# dedicated palette entry (red/green/cyan/white) are lightened ~18-35%
+# from their base color rather than invented from scratch.
+ansi = ["#172b31", "#e0667a", "#4fd8b0", "#e0b563", "#5da9d9", "#9a93d9", "#6fc9bf", "#9fc9bd"]
+brights = ["#46615c", "#e68292", "#6fdfbe", "#d9b877", "#63b3e0", "#8fa8d9", "#89d3cb", "#c1dcd4"]
+
+[colors.tab_bar]
+background = "#0a171a"   # base
+
+[colors.tab_bar.active_tab]
+bg_color = "#132329"     # surface0
+fg_color = "#4fd8b0"     # green
+intensity = "Bold"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#0a171a"     # base
+fg_color = "#46615c"     # overlay1
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#172b31"     # surface1
+fg_color = "#9fc9bd"     # text
+
+[colors.tab_bar.new_tab]
+bg_color = "#0a171a"     # base
+fg_color = "#46615c"     # overlay1
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#172b31"     # surface1
+fg_color = "#4fd8b0"     # green
