@@ -1,0 +1,52 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+palette = 'p1interspace'
+
+add_newline = true
+format = '$directory$git_branch$git_status$character'
+
+[palettes.p1interspace]
+base       = '#0a171a'
+mantle     = '#081417'
+surface0   = '#132329'
+surface1   = '#172b31'
+surface2   = '#1f3a40'
+overlay0   = '#3c5b56'
+overlay1   = '#46615c'
+overlay2   = '#5c7d76'
+subtext0   = '#7d9490'
+text       = '#9fc9bd'
+blue       = '#5da9d9'
+sky        = '#63b3e0'
+green      = '#4fd8b0'
+teal       = '#6fc9bf'
+sand       = '#d9b877'
+lavender   = '#8fa8d9'
+peach      = '#e0985c'
+coral      = '#e08f83'
+purple     = '#9a93d9'
+mauve      = '#6f63b3'
+red        = '#e0667a'
+yellow     = '#e0b563'
+border     = '#24413c'
+
+[directory]
+style = "fg:blue bold"
+format = "[$path]($style) "
+truncate_to_repo = false
+
+[git_branch]
+style = "bg:surface2 fg:green"
+format = "[\ue0b6](fg:surface2)[($symbol$branch)]($style)"
+
+[git_status]
+style = "bg:surface2 fg:yellow"
+format = "[$ahead_behind]($style)[\ue0b0](fg:surface2) "
+ahead = " 🡑${count}"
+behind = "  🡓${count}"
+diverged = " 🡑${ahead_count}🡓${behind_count}"
+
+[character]
+success_symbol = "[>](bold green)"
+error_symbol = "[>](bold red)"
+vimcmd_symbol = "[>](bold teal)"

@@ -85,12 +85,21 @@ Either way, the WezTerm palette is generated from the exact same hex values as t
 ## Structure
 
 ```
+palette.lua                   -- shared color palette, repo root — required directly by
+                                  nvim (via a thin re-export) AND WezTerm's plugin/init.lua
+util.lua                      -- shared color math (blend/darken/lighten), repo root —
+                                  pure Lua, no vim.* calls, so any Lua runtime can use it
 lua/p1interspace/
   init.lua                    -- load() entry point, ColorScheme/LazyLoad reapply hooks
   config.lua                  -- setup(), integrations table
-  palette.lua                 -- the color values, nothing else
-  util.lua                    -- blend/darken/lighten, set_highlights()
-  theme.lua                   -- merges editor/syntax/treesitter + enabled integrations
+  palette.lua                 -- thin re-export of the root palette.lua (nvim plugin
+                                  managers only scan a plugin's own lua/ directory, so
+                                  this exists purely so require() still resolves)
+  util.lua                    -- thin re-export of the root util.lua
+  highlight.lua                -- the one genuinely nvim-specific piece: set_highlights(),
+                                  which calls vim.api.nvim_set_hl — kept separate from the
+                                  root util.lua so that file stays honestly tool-agnostic
+  theme.lua                    -- merges editor/syntax/treesitter + enabled integrations
   groups/
     editor.lua                -- windows, cursor, statusline, popup, search, diagnostics, diff, spell
     syntax.lua                -- legacy (non-treesitter) vim syntax groups
@@ -106,11 +115,22 @@ lua/p1interspace/
       fzf_lua.lua
       noice.lua
 colors/p1interspace.lua       -- standard :colorscheme entry point
-plugin/init.lua               -- WezTerm plugin entry point (apply_to_config)
+plugin/init.lua               -- WezTerm plugin entry point (apply_to_config) — reads
+                                  palette.lua/util.lua straight from the repo root
 extras/
   tmux/p1interspace.conf
-  wezterm/p1interspace.toml
+  wezterm/p1interspace.toml   -- manual-install alternative to the plugin mechanism above
+  starship/starship.toml
 ```
+
+**Why palette.lua and util.lua live at the repo root, not inside `lua/`:** this is a theme
+repo first, with nvim/WezTerm/tmux/starship as integrations on top of it — not an nvim plugin
+that happens to also support other tools. nvim and WezTerm both run real Lua, so they share
+the root files directly (nvim through a one-line re-export, since its plugin manager only
+discovers `lua/`/`colors/` at a repo's root — that constraint is real and can't be configured
+around). tmux and starship can't `require` Lua at all, so `extras/tmux/p1interspace.conf` and
+`extras/starship/starship.toml` are hand-maintained against the same root palette rather than
+dynamically reading it — keep them in sync manually if the palette changes.
 
 Each integration file is `function(ctx) -> table of highlight groups`, only required and merged into the final highlight table when its `config.integrations.<name>` flag is `true` — same pattern catppuccin uses for its own `groups/integrations/*.lua`, rather than one large file with an if-block per plugin.
 

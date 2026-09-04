@@ -1,7 +1,7 @@
 local config = require("p1interspace.config")
 local palette = require("p1interspace.palette")
 local theme = require("p1interspace.theme")
-local util = require("p1interspace.util")
+local highlight = require("p1interspace.highlight")
 
 local M = {}
 
@@ -17,7 +17,7 @@ function M.load()
 
 	local opts = config.options
 	local highlights = theme.get(palette, opts)
-	util.set_highlights(highlights)
+	highlight.set_highlights(highlights)
 
 	vim.o.winblend = opts.popup_blend
 	vim.o.pumblend = opts.popup_blend
@@ -26,7 +26,7 @@ function M.load()
 		pattern = "LazyLoad",
 		callback = function()
 			local reapplied = theme.get(palette, config.options)
-			util.set_highlights(reapplied)
+			highlight.set_highlights(reapplied)
 		end,
 	})
 
@@ -34,7 +34,7 @@ function M.load()
 		callback = function()
 			if vim.g.colors_name == "p1interspace" then
 				local reapplied = theme.get(palette, config.options)
-				util.set_highlights(reapplied)
+				highlight.set_highlights(reapplied)
 			end
 		end,
 	})
