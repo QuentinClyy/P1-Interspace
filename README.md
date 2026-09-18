@@ -54,6 +54,8 @@ Copy `extras/tmux/p1interspace.conf` into your tmux config directory and source 
 source-file ~/.config/tmux/p1interspace.conf
 ```
 
+The theme also styles tmux popups to match Neovim floats, and sets the `@tpack-color-*` options so the [tpack](https://github.com/tmuxpack/tpack) plugin manager TUI uses the same palette.
+
 To let your terminal's own transparency/blur show through the tmux status bar and panes instead of the solid background color, replace every `bg=#0c1917` in `p1interspace.conf` with `bg=default`.
 
 ## WezTerm
